@@ -10,6 +10,7 @@
     <script src="js/jquery-1.9.1.min.js"></script>
     <script src="jquery.mobile/jquery.mobile-1.3.2.min.js"></script>
 
+
     <script type="text/javascript">
         $(document).ready(function () {
             if (localStorage.getItem("Estado") === null) {
@@ -32,65 +33,55 @@
             }
         }
     </script>
-    <script src="js/Database.js" type="text/javascript"></script>
-
-    <script type="text/javascript">
+    <script type="text/javascript" src="js/Database.js"></script>
+    <script>
         $(document).ready(function () {
-            $("#MR_Date").val(new Date().toJSON().substring(0, 10));
-            $("#MR_Time").val(new Date().toLocaleTimeString());
-
+            queryPatientHabitosReg();
         });
         function Guardar() {
             var Datos = new Object;
-            Datos.MR_Slot = $("#MR_Slot").val();
-            Datos.MR_Value1 = $("#MR_Value1").val();
-            Datos.MR_Date = $("#MR_Date").val();
-            Datos.MR_Time = $("#MR_Time").val();
-            Datos.MR_Note = $("#MR_Note").val();
-            Datos.MR_Type = 1;
-            insertGSResult(Datos);
+            Datos.PP_GetUpTime = $("#PP_GetUpTime").val();
+            Datos.PP_BreakfastTime = $("#PP_BreakfastTime").val();
+            Datos.PP_LunchTime = $("#PP_LunchTime").val();
+            Datos.PP_DinnerTime = $("#PP_DinnerTime").val();
+            Datos.PP_SleepTime = $("#PP_SleepTime").val();
+            insertPatientHabitos(Datos);
+        }
+        function Atras() {
+            window.location = "RegPatient.html";
         }
     </script>
 </head>
 <body>
     <div data-role="page">
         <div data-role="header" data-theme="b" data-position="fixed">
-            <a href="javascript:history.back(1);" data-icon="arrow-l" class="ui-btn-left" data-iconpos="left">Atras</a>
-            <h1>Nuevo Resultado </h1>
+            <a href="javascript:Atras();" data-icon="arrow-l" class="ui-btn-left" data-iconpos="left">Anterior</a>
+            <h1>Habitos - Horarios</h1>
+            <a href="javascript:Guardar();" data-icon="arrow-r" class="ui-btn-right" data-iconpos="right">Siguiente</a>
         </div>
         <div data-role="content">
             <div class="ui-body ui-body-b">
                 <div data-role="fieldcontain" >
-                    <label for="MR_Slot" >Momento de la medición:</label>
-                    <select name="MR_Slot" id="MR_Slot" data-native-menu="false" data-theme="c">
-                        <option value="1">Despertar</option>
-                        <option value="2">Antes Desayuno</option>
-                        <option value="3">Despues Desayuno</option>
-                        <option value="4">Antes Almuerzo</option>
-                        <option value="5">Despues Almuerzo</option>
-                        <option value="6">Antes Cena</option>
-                        <option value="7">Despues Cena</option>
-                        <option value="8">Al Dormir</option>
-                        <option value="9">Media Noche</option>
-                    </select>
+                    <label for="PP_GetUpTime" >Hora Despertar:</label>
+                    <input type="time" name="PP_GetUpTime" id="PP_GetUpTime" value="06:00" />
                 </div>
                 <div data-role="fieldcontain" >
-                    <label for="MR_Value1" >Valor medición:</label>
-                    <input type="number" name="MR_Value1" id="MR_Value1" value=""  />
+                    <label for="PP_BreakfastTime" >Hora Desayuno:</label>
+                    <input type="time" name="PP_BreakfastTime" id="PP_BreakfastTime" value="08:00" />
                 </div>
                 <div data-role="fieldcontain" >
-                    <label for="MR_Date" class="ui-input-text">Fecha medición:</label>
-                    <input type="date" name="MR_Date" id="MR_Date" value=""  />
+                    <label for="PP_LunchTime" >Hora Almuerzo:</label>
+                    <input type="time" name="PP_LunchTime" id="PP_LunchTime" value="12:00" />
                 </div>
                 <div data-role="fieldcontain" >
-                    <label for="MR_Time" class="ui-input-text">Hora medición:</label>
-                    <input type="time" name="MR_Time" id="MR_Time" value=""  />
+                    <label for="PP_DinnerTime" >Hora Cena:</label>
+                    <input type="time" name="PP_DinnerTime" id="PP_DinnerTime" value="18:00" />
                 </div>
                 <div data-role="fieldcontain" >
-                    <label for="MR_Note" class="ui-input-text">Notas de medición:</label>
-                    <textarea name="MR_Note" id="MR_Note" ></textarea>
+                    <label for="PP_SleepTime" >Hora de dormir:</label>
+                    <input type="time" name="PP_SleepTime" id="PP_SleepTime" value="22:00" />
                 </div>
-                <a href="javascript:Guardar();" data-role="button" data-icon="plus" data-iconpos="right">Agregar</a>
+
             </div>
         </div>
         <div data-role="footer" id="footer" data-theme="b" data-position="fixed">

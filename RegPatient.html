@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" href="jquery.mobile/jquery.mobile-1.3.2.min.css" />
+    <script src="js/jquery-1.9.1.min.js"></script>
+    <script src="jquery.mobile/jquery.mobile-1.3.2.min.js"></script>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            if (localStorage.getItem("Estado") === null) {
+                $("#footer").hide();
+            } else {
+                $("#footer").show();
+            }
+        });
+        function GO(opcion) {
+            switch (opcion) {
+                case 0:
+                    window.location = "RegPatient.html";
+                    break;
+                case 1:
+                    window.location = "GS.html";
+                    break;
+                case 2:
+                    window.location = "Peso.html";
+                    break;
+            }
+        }
+    </script>
+     <script type="text/javascript" src="js/Database.js"></script>
+    <script type="text/javascript">
+        $(document).on('pageinit', function (event) {
+            queryPatientProfileReg();
+        });
+        function Guardar() {
+            var Datos = new Object;
+            Datos.PP_Name = $("#NAME").val();
+            Datos.PP_Birthday = $("#BIRTHDAY").val();
+            Datos.PP_Sex = $("input[name='SEX']:checked").val();
+            Datos.PP_Height = $("#HEIGHT").val();
+            Datos.PP_Weight = $("#WEIGHT").val();
+            Datos.PP_BGPrescribedFreq = $("#BGPrescribedFreq").val();
+            Datos.PP_DType = $("input[name='DType']:checked").val();
+            insertPatientProfile(Datos);
+        }
+    </script>
+</head>
+<body>
+    <div data-role="page">
+        <div data-role="header" data-theme="b" data-position="fixed">
+            <a href="RegHelp.html" class="ui-btn-left" data-role="button" data-icon="info" data-iconpos="notext" data-rel="dialog">Ayuda</a>
+    <h1>Mis Datos</h1>
+    <a href="javascript:Guardar();" data-icon="arrow-r" class="ui-btn-right" data-iconpos="right">Siguiente</a>
+
+        </div>
+        <div data-role="content">
+            <div class="ui-body ui-body-b">
+        <div data-role="fieldcontain" class="ui-field-contain ui-body ui-br">
+            <label for="NAME" class="ui-input-text">Nombre:</label>
+            <input type="text" name="NAME" id="NAME" value="" class="ui-input-text ui-body-b ui-corner-all ui-shadow-inset" />
+        </div>
+        <div data-role="fieldcontain" class="ui-field-contain ui-body ui-br">
+            <label for="BIRTHDAY" class="ui-input-text">Fecha Nacimiento:</label>
+            <input type="date" name="BIRTHDAY" id="BIRTHDAY" value="" class="ui-input-text ui-body-b ui-corner-all ui-shadow-inset" />
+        </div>
+        <div data-role="fieldcontain" class="ui-field-contain ui-body ui-br">
+            <fieldset data-role="controlgroup">
+                <legend>Genero:</legend>
+                <input type="radio" name="SEX" id="MAS" value="0" checked="checked" />
+                <label for="MAS">Masculino</label>
+
+                <input type="radio" name="SEX" id="FEM" value="1" />
+                <label for="FEM">Femenino</label>
+            </fieldset>
+        </div>
+        <div data-role="fieldcontain" class="ui-field-contain ui-body ui-br">
+            <label for="HEIGHT" class="ui-input-text">Estatura:</label>
+            <input type="range" name="HEIGHT" id="HEIGHT" min="0" max="250" value="165" data-mini="true"  class="ui-input-text ui-body-b ui-corner-all ui-shadow-inset" />
+        </div>
+
+        <div data-role="fieldcontain" class="ui-field-contain ui-body ui-br">
+            <label for="WEIGHT" class="ui-input-text">Peso:</label>
+            <input type="range" name="WEIGHT" id="WEIGHT" min="0" max="200" value="70" data-mini="true" class="ui-input-text ui-body-b ui-corner-all ui-shadow-inset" />
+        </div>
+        <div data-role="fieldcontain" class="ui-field-contain ui-body ui-br">
+            <label for="BGPrescribedFreq" class="ui-input-text">Cantidad Mediciones Diarias:</label>
+            <input type="range" data-mini="true" min="0" max="9" name="BGPrescribedFreq" id="BGPrescribedFreq" value="3" class="ui-input-text ui-body-b ui-corner-all ui-shadow-inset" />
+        </div>
+
+        <div data-role="fieldcontain" class="ui-field-contain ui-body ui-br">
+            <fieldset data-role="controlgroup">
+                <legend>Tipo de Diabetes:</legend>
+
+                <input type="radio" name="DType" id="Radio1" value="0" checked="checked" />
+                <label for="Radio1">Diabetes Tipo I</label>
+
+                <input type="radio" name="DType" id="Radio2" value="1" />
+                <label for="Radio2">Diabetes Tipo II</label>
+
+                <input type="radio" name="DType" id="Radio3" value="2" />
+                <label for="Radio3">Diabetes Gestacional</label>
+
+                <input type="radio" name="DType" id="Radio4" value="3" />
+                <label for="Radio4">Diabetes Insípida</label>
+
+                <input type="radio" name="DType" id="Radio5" value="4" />
+                <label for="Radio5">Ninguna</label>
+            </fieldset>
+        </div>
+    </div>
+        </div>
+        <div data-role="footer" id="footer" data-theme="b" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="javascript:GO(0)" data-transition="turn">Mi Perfil</a></li>
+                    <li><a href="javascript:GO(1);" data-transition="turn">Glucosa</a></li>
+                    <li><a href="javascript:GO(2)" data-transition="turn">Peso</a></li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

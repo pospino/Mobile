@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" href="jquery.mobile/jquery.mobile-1.3.2.min.css" />
+    <script src="js/jquery-1.9.1.min.js"></script>
+    <script src="jquery.mobile/jquery.mobile-1.3.2.min.js"></script>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            if (localStorage.getItem("Estado") === null) {
+                $("#footer").hide();
+            } else {
+                $("#footer").show();
+            }
+        });
+        function GO(opcion) {
+            switch (opcion) {
+                case 0:
+                    window.location = "RegPatient.html";
+                    break;
+                case 1:
+                    window.location = "GS.html";
+                    break;
+                case 2:
+                    window.location = "Peso.html";
+                    break;
+            }
+        }
+    </script>
+    <link href="css/General.css" rel="stylesheet" />
+    <script type="text/javascript" src="js/Database.js"></script>
+    <script type="text/javascript" src="js/jquery.backgroundpos.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            queryPatientIMC();
+            Calcular();
+            $("#ImgResultado").animate({ backgroundPosition: '-81px 0px' });
+            $("#Peso").change(Calcular);
+            $("#Altura").change(Calcular);
+
+
+        });
+        var Calcular = function () {
+            var Dato = new Object;
+            Dato.PP_Weight = $("#Peso").val();
+            Dato.PP_Height = $("#Altura").val();
+            var imc = Dato.PP_Weight / ((Dato.PP_Height * Dato.PP_Height) / 10000);
+            if (imc >= 40) {
+                newvalue = '-81px 0px';
+                texto = "Tiene excesivo sobrepeso. Esto podría tener consecuencias negativas para su salud. Requiere atención médica.";
+            } else {
+                if (imc >= 35 && imc < 40) {
+                    newvalue = '-162px 0px';
+                    texto = "Tiene mucho sobrepeso. Esto podría tener consecuencias negativas para su salud. Requiere atención médica.";
+                } else {
+                    if (imc >= 30 && imc < 35) {
+                        newvalue = '-243px 0px';
+                        texto = "Tiene sobrepeso y debería bajar de peso con prontitud.";
+                    } else {
+                        if (imc >= 25 && imc < 30) {
+                            newvalue = '-324px 0px';
+                            texto = "Su peso es algo alto y debería ser reducido en el largo plazo.";
+                        } else {
+                            if (imc >= 18.5 && imc < 25) {
+                                newvalue = '-405px 0px';
+                                texto = "Su peso se encuentra dentro del rango normal.";
+                            } else {
+                                if (imc >= 17 && imc < 18.5) {
+                                    newvalue = '-486px 0px';
+                                    texto = "Usted tiene bajo peso y debería aumentar.";
+                                } else {
+                                    if (imc >= 16 && imc < 17) {
+                                        newvalue = '-567px 0px';
+                                        texto = "Su peso es muy inferior al normal. Podría requierir atención médica.";
+                                    } else {
+                                        newvalue = '-729px 0px';
+                                        texto = "Su peso es muy inferior al normal. Podría requierir atención médica.";
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            $("#ImgResultado").css('background-position', newvalue);
+            $("#txtResultado").html(texto);
+        }
+    </script>
+</head>
+<body>
+    <div data-role="page">
+        <div data-role="header" data-theme="b" data-position="fixed">
+            <h1>IMC</h1>
+        </div>
+        <div data-role="content">
+            <div id="ImgResultado" style="background-position: 0px 0px;"></div>
+            <p id="txtResultado"></p>
+            <div data-role="fieldcontain" class="ui-field-contain ui-body ui-br" data-mini="true">
+                <label for="Altura" class="ui-input-text">Estatura:</label>
+                <input name="Altura" id="Altura" min="0" max="300" value="70" type="range" data-mini="true" />
+            </div>
+            <div data-role="fieldcontain" class="ui-field-contain ui-body ui-br" data-mini="true">
+                <label for="Peso" class="ui-input-text">Peso:</label>
+                <input name="Peso" id="Peso" min="0" max="300" value="140" type="range" data-mini="true" />
+            </div>
+        </div>
+        <div data-role="footer" id="footer" data-theme="b" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="javascript:GO(0)" data-transition="turn">Mi Perfil</a></li>
+                    <li><a href="javascript:GO(1);" data-transition="turn">Glucosa</a></li>
+                    <li><a href="javascript:GO(2)" data-transition="turn">Peso</a></li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

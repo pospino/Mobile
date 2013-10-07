@@ -13,15 +13,17 @@
 
   <script>
       $(document).ready(function () {
-
+          if (localStorage["EULA"] != null) {
+              window.location = "RegPatient.html";
+          }
       });
       function Acepto(valor) {
           if (valor == 1) {
               localStorage["EULA"] = true;
-              window.location = "RegPatient.aspx";
+              window.location = "RegPatient.html";
           } else {
               localStorage["EULA"] = false;
-              window.location = "RegPatient.aspx";
+              window.location = "RegPatient.html";
           }
       }
     </script>
@@ -29,6 +31,7 @@
 <body>
     <div data-role="page">
         <div data-role="header" data-theme="b" data-position="fixed">
+             <h1>Inicio</h1>
         </div>
         <div data-role="content">
              <p>Pedro Ospino Romero  en lo sucesivo “INVESTIGADOR” comprometido con el buen uso y la protección de datos personales y dando cumplimiento a lo consagrado en el artículo 10 del Decreto 1377 de 2013 mediante el cual se reglamentó la Ley 1581 de 2012 sobre Protección de Datos Personales informa que va a recolectar y almacenar información personal en el transcurso normal de la investigación haciendo uso responsable de la misma.</p>
@@ -46,14 +49,7 @@
 
         </div>
         <div data-role="footer" id="footer" data-theme="b" data-position="fixed">
-            <div data-role="navbar">
-                <ul>
-                    <li><a href="javascript:GO(0)" data-transition="turn">Mi Perfil</a></li>
-                    <li><a href="javascript:GO(1);" data-transition="turn">Glucosa</a></li>
-                    <li><a href="javascript:GO(2)" data-transition="turn">Peso</a></li>
-
-                </ul>
-            </div>
+            
         </div>
     </div>
 </body>

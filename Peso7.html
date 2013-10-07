@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" href="jquery.mobile/jquery.mobile-1.3.2.min.css" />
+    <script src="js/jquery-1.9.1.min.js"></script>
+    <script src="jquery.mobile/jquery.mobile-1.3.2.min.js"></script>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            if (localStorage.getItem("Estado") === null) {
+                $("#footer").hide();
+            } else {
+                $("#footer").show();
+            }
+        });
+        function GO(opcion) {
+            switch (opcion) {
+                case 0:
+                    window.location = "RegPatient.html";
+                    break;
+                case 1:
+                    window.location = "GS.html";
+                    break;
+                case 2:
+                    window.location = "Peso.html";
+                    break;
+            }
+        }
+    </script>
+    <link href="css/jquery.jqplot.min.css" rel="stylesheet" />
+    <script type="text/javascript" src="js/jquery.jqplot.min.js"></script>
+    <script type="text/javascript" src="js/plugins/jqplot.dateAxisRenderer.min.js"></script>
+    <script type="text/javascript" src="js/plugins/jqplot.canvasTextRenderer.min.js"></script>
+    <script type="text/javascript" src="js/plugins/jqplot.canvasAxisTickRenderer.min.js"></script>
+    <script type="text/javascript" src="js/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+    <script type="text/javascript" src="js/plugins/jqplot.highlighter.min.js"></script>
+    <script type="text/javascript" src="js/plugins/jqplot.pointLabels.min.js"></script>
+    <script type="text/javascript" src="js/plugins/jqplot.cursor.min.js"></script>
+    <script type="text/javascript" src="js/plugins/jqplot.dateAxisRenderer.min.js"></script>
+
+    <style>
+        .legend {
+            width: 10em;
+            border: 1px solid black;
+            float: right;
+        }
+
+            .legend .title {
+                display: block;
+                margin: 0.5em;
+                border-style: solid;
+                border-width: 0 0 0 1em;
+                padding: 0 0.3em;
+            }
+    </style>
+    <script src="js/Chart.js" type="text/javascript"></script>
+    <script src="js/chartjs-option.js" type="text/javascript"></script>
+    <script src="js/Database.js" type="text/javascript"></script>
+    <script src="js/legend.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            queryResultDias(2,30);
+        });
+
+        function AddGS() {
+            window.location = "AddPeso.html";
+        }
+        function GS() {
+            window.location = "Peso.html";
+        }
+        function GS7() {
+            window.location = "Peso7.html";
+        }
+        function GS30() {
+            window.location = "Peso30.html";
+        }
+    </script>
+</head>
+<body>
+    <div data-role="page">
+        <div data-role="header" data-theme="b" data-position="fixed">
+            <h1>Mi Peso Mensual</h1>
+            <a href="javascript:AddGS();" data-icon="plus" class="ui-btn-right" data-iconpos="right">Agregar</a>
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="javascript:GS();" data-role="button">Semana</a></li>
+                    <li><a href="javascript:GS7();" data-role="button">Mes</a></li>
+                    <li><a href="javascript:GS30();" data-role="button">Trimestral</a></li>
+                </ul>
+            </div>
+        </div>
+        <div data-role="content">
+            <div id="chartdiv" style="width: 100%;"></div>
+        </div>
+        <div data-role="footer" id="footer" data-theme="b" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="javascript:GO(0)" data-transition="turn">Mi Perfil</a></li>
+                    <li><a href="javascript:GO(1);" data-transition="turn">Glucosa</a></li>
+                    <li><a href="javascript:GO(2)" data-transition="turn">Peso</a></li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

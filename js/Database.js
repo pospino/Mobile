@@ -172,7 +172,7 @@ function insertPatientProfile(Datos) {
 
                                                  });
                                              } else {
-                                                 window.location = "RegHabitos.aspx";
+                                                 window.location = "RegHabitos.html";
                                              }
 
                                          })
@@ -209,12 +209,12 @@ function insertPatientProfile(Datos) {
                                                      dataType: "json",
                                                      data: "{ 'dato': " + JSON.stringify(Datos) + " }",
                                                      success: function (data) {
-                                                         window.location = "RegHabitos.aspx";
+                                                         window.location = "RegHabitos.html";
                                                      },
 
                                                  });
                                              } else {
-                                                 window.location = "RegHabitos.aspx";
+                                                 window.location = "RegHabitos.html";
                                              }
 
                                          })
@@ -224,6 +224,37 @@ function insertPatientProfile(Datos) {
             });
     } catch (e) {
         console.log(e.message);
+    }
+}
+function insertPatientPesoAltura(Datos) {
+    Datos.PP_AutoID = localStorage["PID"];
+    var db = getDB();
+    if (db != false) {
+        db.transaction(
+            function (tx) {
+                tx.executeSql(
+                    'UPDATE PatientProfile SET ' +
+                    ' PP_Height = ?, ' +
+                    ' PP_Weight = ? ' +
+                    'Where PP_AutoID = ?',
+                    [
+                        Datos.PP_Height,
+                        Datos.PP_Weight,
+                        Datos.PP_AutoID
+                    ],
+                    function (tx, result) {
+                        console.log("Paciente actualizado");
+                        var Test = new Object;
+                        Test.MR_Slot = "";
+                        Test.MR_Value1 = Datos.PP_Weight;
+                        Test.MR_Date = new Date().toJSON().substring(0, 10);
+                        Test.MR_Time = new Date().toLocaleTimeString();
+                        Test.MR_Note = "";
+                        Test.MR_Type = 2;
+                        insertGSResult(Test);
+                    },
+                    onError);
+            });
     }
 }
 function insertPatientHabitos(Datos) {
@@ -257,12 +288,12 @@ function insertPatientHabitos(Datos) {
                                 dataType: "json",
                                 data: "{ 'dato': " + JSON.stringify(Datos) + " }",
                                 success: function (data) {
-                                    window.location = "RegObjetivos.aspx";
+                                    window.location = "RegObjetivos.html";
                                 },
 
                             });
                         } else {
-                            window.location = "RegObjetivos.aspx";
+                            window.location = "RegObjetivos.html";
                         }
                     },
                     onError);
@@ -310,11 +341,11 @@ function insertPatientObjetivos(Datos) {
                                                  dataType: "json",
                                                  data: "{ 'dato': " + JSON.stringify(Datos) + " }",
                                                  success: function (data) {
-                                                     window.location = "GS.aspx";
+                                                     window.location = "GS.html";
                                                  },
                                              });
                                          } else {
-                                             window.location = "GS.aspx";
+                                             window.location = "GS.html";
                                          }
                                      })
                             }, onError, onReadyTransaction);
@@ -354,17 +385,17 @@ function insertPatientObjetivos(Datos) {
                                          if (hasDB && localStorage["EULA"]) {
                                              $.ajax({
                                                  type: "POST",
-                                                 url: "Middle/AjaxBridge.aspx/updPatientTarget",
+                                                 url: "Middle/AjaxBridge.html/updPatientTarget",
                                                  contentType: "application/json; charset=utf-8",
                                                  dataType: "json",
                                                  data: "{ 'dato': " + JSON.stringify(Datos) + " }",
                                                  success: function (data) {
-                                                     window.location = "GS.aspx";
+                                                     window.location = "GS.html";
                                                  },
 
                                              });
                                          } else {
-                                             window.location = "GS.aspx";
+                                             window.location = "GS.html";
                                          }
 
                                      })
@@ -400,12 +431,16 @@ function insertGSResult(Datos) {
                          dataType: "json",
                          data: "{ 'dato': " + JSON.stringify(Datos) + " }",
                          success: function (data) {
-                             window.location = "GS.aspx";
+                             window.location = "GS.html";
                          },
 
                      });
                  } else {
-                     window.location = "GS.aspx";
+                     if(Datos.MR_Type == 1)
+                         window.location = "GS.html";
+                     if(Datos.MR_Type == 2)
+                         window.location = "Peso.html";
+
                  }
              },
              function (err) {

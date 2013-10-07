@@ -1,0 +1,149 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" href="jquery.mobile/jquery.mobile-1.3.2.min.css" />
+    <script src="js/jquery-1.9.1.min.js"></script>
+    <script src="jquery.mobile/jquery.mobile-1.3.2.min.js"></script>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            if (localStorage.getItem("Estado") === null) {
+                $("#footer").hide();
+            } else {
+                $("#footer").show();
+            }
+        });
+        function GO(opcion) {
+            switch (opcion) {
+                case 0:
+                    window.location = "RegPatient.html";
+                    break;
+                case 1:
+                    window.location = "GS.html";
+                    break;
+                case 2:
+                    window.location = "Peso.html";
+                    break;
+            }
+        }
+    </script>
+    <script type="text/javascript" src="js/Database.js"></script>
+    <script type="text/javascript">
+        function Atras() {
+            window.location = "RegHabitos.html";
+        }
+        $(document).ready(function () {
+            queryPatientObjetivosReg();
+
+            $("input").rangeslider();
+
+        });
+        function Guardar() {
+            var Datos = new Object;
+
+            Datos.PT_Target1_U = $("#T1_a").val();
+            Datos.PT_Target1_L = $("#T1_b").val();
+            Datos.PT_Target2_U = $("#T2_a").val();
+            Datos.PT_Target2_L = $("#T2_b").val();
+            Datos.PT_Target3_U = $("#T3_a").val();
+            Datos.PT_Target3_L = $("#T3_b").val();
+            Datos.PT_Target4_U = $("#T4_a").val();
+            Datos.PT_Target4_L = $("#T4_b").val();
+            Datos.PT_Target5_U = $("#T5_a").val();
+            Datos.PT_Target5_L = $("#T5_b").val();
+            Datos.PT_TargetType = 1;
+            insertPatientObjetivos(Datos);
+            Datos = new Object;
+            Datos.PT_Target1_U = $("#P1_a").val();
+            Datos.PT_Target1_L = $("#P1_b").val();
+            Datos.PT_TargetType = 2;
+            insertPatientObjetivos(Datos);
+        }
+    </script>
+</head>
+<body>
+    <div data-role="page">
+        <div data-role="header" data-theme="b" data-position="fixed">
+            <a href="javascript:Atras();" data-icon="arrow-l" class="ui-btn-left" data-iconpos="left">Anterior</a>
+            <h1>Mis Objetivos</h1>
+            <a href="javascript:Guardar();" data-icon="arrow-r" class="ui-btn-right" data-iconpos="right">Siguiente</a>
+        </div>
+        <div data-role="content">
+            <div class="ui-body ui-body-b">
+                <div data-role="collapsible-set">
+                    <div data-role="collapsible" data-theme="b" data-content-theme="b">
+                        <h3>Peso</h3>
+                        <label for="P1" class="ui-input-text">Peso Objetivo a Mantener:</label>
+                        <div data-role="rangeslider" data-mini="true">
+                            <input name="P1_a" id="P1_a" min="0" max="200" value="50" type="range" />
+                            <input name="P1_b" id="P1_b" min="0" max="200" value="80" type="range" />
+                        </div>
+                    </div>
+                    <div data-role="collapsible" data-theme="b" data-content-theme="b">
+                        <h3>Glucosa en Sangre</h3>
+                        <div data-role="collapsible-set" data-theme="b" data-content-theme="d" data-mini="true">
+                            <div data-role="collapsible" data-collapsed="false">
+                                <h3>Despertar</h3>
+                                <label for="T1" class="ui-input-text">Objetivo de Glucosa en Sangre al Despertar:</label>
+                                <div data-role="rangeslider" data-mini="true">
+                                    <input name="T1_a" id="T1_a" min="0" max="300" value="60" type="range" />
+                                    <input name="T1_b" id="T1_b" min="0" max="300" value="110" type="range" />
+                                </div>
+                            </div>
+                            <div data-role="collapsible" data-collapsed="false">
+                                <h3>Antes de Comer</h3>
+                                <label for="T2" class="ui-input-text">Objetivo de Glucosa en Sangre antes de Comer:</label>
+                                <div data-role="rangeslider" data-mini="true">
+                                    <input name="T2_a" id="T2_a" min="0" max="300" value="60" type="range" />
+                                    <input name="T2_b" id="T2_b" min="0" max="300" value="110" type="range" />
+                                </div>
+                            </div>
+                            <div data-role="collapsible" data-collapsed="false">
+                                <h3>Despues de Comer</h3>
+                                <label for="T3" class="ui-input-text">Objetivo de Glucosa en Sangre despues de Comer:</label>
+                                <div data-role="rangeslider" data-mini="true">
+                                    <input name="T3_a" id="T3_a" min="0" max="300" value="70" type="range" />
+                                    <input name="T3_b" id="T3_b" min="0" max="300" value="140" type="range" />
+                                </div>
+
+                            </div>
+                            <div data-role="collapsible" data-collapsed="false">
+                                <h3>Al Acostarse</h3>
+                                <label for="T4" class="ui-input-text">Objetivo de Glucosa en Sangre al Acostarse:</label>
+                                <div data-role="rangeslider" data-mini="true">
+                                    <input name="T4_a" id="T4_a" min="0" max="300" value="60" type="range" />
+                                    <input name="T4_b" id="T4_b" min="0" max="300" value="110" type="range" />
+                                </div>
+                            </div>
+                            <div data-role="collapsible" data-collapsed="false">
+                                <h3>Media Noche</h3>
+                                <label for="T5" class="ui-input-text">Objetivo de Glucosa en Sangre en la Media Noche:</label>
+                                <div data-role="rangeslider" data-mini="true">
+                                    <input name="T5_a" id="T5_a" min="0" max="300" value="60" type="range" />
+                                    <input name="T5_b" id="T5_b" min="0" max="300" value="110" type="range" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div data-role="footer" id="footer" data-theme="b" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="javascript:GO(0)" data-transition="turn">Mi Perfil</a></li>
+                    <li><a href="javascript:GO(1);" data-transition="turn">Glucosa</a></li>
+                    <li><a href="javascript:GO(2)" data-transition="turn">Peso</a></li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
