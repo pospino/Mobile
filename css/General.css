@@ -1,0 +1,6 @@
+﻿#ImgResultado{
+	float:left;
+    width:81px;
+    background:url(../media/sprite_estados.png) no-repeat 0 0;
+	height:80px;
+}

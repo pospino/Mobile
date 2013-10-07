@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" href="jquery.mobile/jquery.mobile-1.3.2.min.css" />
+    <script src="js/jquery-1.9.1.min.js"></script>
+    <script src="jquery.mobile/jquery.mobile-1.3.2.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            if (localStorage.getItem("Estado") === null) {
+                $("#footer").hide();
+            } else {
+                $("#footer").show();
+            }
+        });
+        function GO(opcion) {
+            switch (opcion) {
+                case 0:
+                    window.location = "RegPatient.aspx";
+                    break;
+                case 1:
+                    window.location = "GS.aspx";
+                    break;
+                case 2:
+                    window.location = "Peso.aspx";
+                    break;
+            }
+        }
+    </script>
+    <script src="js/Database.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#MR_Date").val(new Date().toJSON().substring(0, 10));
+            $("#MR_Time").val(new Date().toLocaleTimeString());
+
+        });
+        function Guardar() {
+            var Datos = new Object;
+            Datos.MR_Slot = $("#MR_Slot").val();
+            Datos.MR_Value1 = $("#MR_Value1").val();
+            Datos.MR_Date = $("#MR_Date").val();
+            Datos.MR_Time = $("#MR_Time").val();
+            Datos.MR_Note = $("#MR_Note").val();
+            Datos.MR_Type = 1;
+            insertGSResult(Datos);
+        }
+    </script>
+</head>
+<body>
+    <div data-role="page">
+        <div data-role="header" data-theme="b" data-position="fixed">
+            <a href="javascript:history.back(1);" data-icon="arrow-l" class="ui-btn-left" data-iconpos="left">Atras</a>
+            <h1>Nuevo Resultado </h1>
+        </div>
+        <div data-role="content">
+            <div class="ui-body ui-body-b">
+                <div data-role="fieldcontain" >
+                    <label for="MR_Slot" >Momento de la medición:</label>
+                    <select name="MR_Slot" id="MR_Slot" data-native-menu="false" data-theme="c">
+                        <option value="1">Despertar</option>
+                        <option value="2">Antes Desayuno</option>
+                        <option value="3">Despues Desayuno</option>
+                        <option value="4">Antes Almuerzo</option>
+                        <option value="5">Despues Almuerzo</option>
+                        <option value="6">Antes Cena</option>
+                        <option value="7">Despues Cena</option>
+                        <option value="8">Al Dormir</option>
+                        <option value="9">Media Noche</option>
+                    </select>
+                </div>
+                <div data-role="fieldcontain" >
+                    <label for="MR_Value1" >Valor medición:</label>
+                    <input type="number" name="MR_Value1" id="MR_Value1" value=""  />
+                </div>
+                <div data-role="fieldcontain" >
+                    <label for="MR_Date" class="ui-input-text">Fecha medición:</label>
+                    <input type="date" name="MR_Date" id="MR_Date" value=""  />
+                </div>
+                <div data-role="fieldcontain" >
+                    <label for="MR_Time" class="ui-input-text">Hora medición:</label>
+                    <input type="time" name="MR_Time" id="MR_Time" value=""  />
+                </div>
+                <div data-role="fieldcontain" >
+                    <label for="MR_Note" class="ui-input-text">Notas de medición:</label>
+                    <textarea name="MR_Note" id="MR_Note" ></textarea>
+                </div>
+                <a href="javascript:Guardar();" data-role="button" data-icon="plus" data-iconpos="right">Agregar</a>
+            </div>
+        </div>
+        <div data-role="footer" id="footer" data-theme="b" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="javascript:GO(0)" data-transition="turn">Mi Perfil</a></li>
+                    <li><a href="javascript:GO(1);" data-transition="turn">Glucosa</a></li>
+                    <li><a href="javascript:GO(2)" data-transition="turn">Peso</a></li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
