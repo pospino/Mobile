@@ -1,5 +1,5 @@
 ﻿
-var hasDB = true;
+var hasDB = false;
 var lista1 = [0, 0, 0, 0, 0, 0, 0, 0, 0];
 var lista2 = [0, 0, 0, 0, 0, 0, 0, 0, 0];
 var lista3 = [0, 0, 0, 0, 0, 0, 0, 0, 0];
