@@ -60,6 +60,7 @@
     <Content Include="AddGS.html" />
     <Content Include="AddPeso.html" />
     <Content Include="config.xml" />
+    <Content Include="FR.html" />
     <Content Include="RegPatient.html" />
     <Content Include="RegObjetivos.html" />
     <Content Include="RegHelp.html" />

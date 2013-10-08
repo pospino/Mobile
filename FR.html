@@ -1,0 +1,253 @@
+﻿<!DOCTYPE HTML>
+<html lang="en-US">
+	<head>
+		<meta charset="UTF-8">
+		<title>Main Page</title>
+		<meta name="viewport"
+		content="width=device-width; height=device-height; user-scalable=no" />
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+		<link rel="stylesheet" href="jquery.mobile/jquery.mobile-1.3.2.min.css" />
+
+		<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+		<script type="text/javascript"
+		src="jquery.mobile/jquery.mobile-1.3.2.min.js"></script>
+		<script type="text/javascript" src="js/scripts.js"></script>
+		<script type="text/javascript">
+		    function GO(opcion) {
+		        switch (opcion) {
+		            case 0:
+		                window.location = "RegPatient.html";
+		                break;
+		            case 1:
+		                window.location = "GS.html";
+		                break;
+		            case 2:
+		                window.location = "Peso.html";
+		                break;
+		            case 3:
+		                window.location = "FR.html";
+		                break;
+		        }
+		    }
+		    $(document).bind("mobileinit", function () {
+		        // Make your jQuery Mobile framework configuration changes here!
+		        $.mobile.allowCrossDomainPages = true;
+		    });
+
+		    jQuery.fn.reset = function () {
+		        $(this).each(function () {
+		            this.reset();
+		        });
+		    }
+
+		</script>
+		<style type="text/css">
+			#myform {
+				padding-left:8px;
+				padding-right:8px;
+			}
+			div.displayelem {
+				padding:15px;
+			}
+			#thehead {
+				padding-bottom:8px
+			}
+			#pic {
+				padding-left:15px
+			}
+		</style>
+	</head>
+	<body>
+		<div data-role="page">
+			<div data-role="header" data-theme="b" data-position="fixed">
+				<h1>Mi Riesgo - FindRisk</h1>
+			</div>
+			<div data-role="content" class="ui-content" role="main">
+				<form action="#" method="get" id="H">
+					<div data-role="fieldcontain">
+						<fieldset data-role="controlgroup" data-type="vertical">
+							<legend>
+								Edad:
+							</legend>
+							<input type="radio" name="PP_A" id="m45" value="0" />
+							<label
+							for="m45"> Menos de 45 Años</label>
+							<input type="radio"
+							name="PP_A" id="E45_54" value="2" />
+							<label for="E45_54"> Entre 45 y 54 Años</label>
+							<input type="radio" name="PP_A" id="E55_64"
+							value="3" />
+							<label for="E55_64">Entre 55 - 64 Años</label>
+							<input
+							type="radio" name="PP_Edad" id="M64" value="4" />
+							<label
+							for="M64"> Mas de 64 Años</label>
+						</fieldset>
+					</div>
+
+					<div class="ui-body ui-body-b">
+						<fieldset class="ui-grid-a">
+							<div data-role="fieldcontain"
+							class="ui-field-contain ui-body ui-br">
+								<label for="PP_B1" class="ui-input-text">Peso (Kg):</label>
+								<input
+								type="number" name="PP_B1" id="PP_B1" value=""
+								>
+							</div>
+							<div data-role="fieldcontain"
+							class="ui-field-contain ui-body ui-br">
+								<label for="PP_B2" class="ui-input-text">Altura (cm):</label>
+								<input
+								type="number" name="PP_B2" id="PP_B2" value=""
+								>
+							</div>
+							<div data-role="fieldcontain"
+							class="ui-field-contain ui-body ui-br">
+								<label for="PP_B" class="ui-input-text">IMC (Kg/m2):</label>
+								<input
+								type="text" name="PP_B" id="PP_B" value="" readonly="readonly"
+								>
+								<div data-role="header" style="text-align: center;">
+									<label id="MB"></label>
+								</div>
+
+							</div>
+						</fieldset>
+
+					</div>
+
+					<div data-role="fieldcontain">
+						<fieldset data-role="controlgroup" data-type="vertical">
+							<legend>
+								Perímetro de cintura medido por debajo de las
+								costillas (normalmente a nivel del ombligo):
+							</legend>
+
+							<input type="radio" name="PP_C" id="C_uno" value="0" />
+							<label
+							for="C_uno"> (Mujeres) Menos de 80 cm.
+								<br />
+								(Hombres)
+								Menos de 94 cm. </label>
+							<input type="radio" name="PP_C" id="C_dos" value="3" />
+							<label
+							for="C_dos"> (Mujeres) Entre 80 y 88 cm.
+								<br />
+								(Hombres)
+								Entre 94-102 cm. </label>
+							<input type="radio" name="PP_C" id="C_tres" value="4" />
+							<label
+							for="C_tres"> (Mujeres) Más de 88 cm.
+								<br />
+								(Hombres)
+								Más de 102 cm. </label>
+						</fieldset>
+					</div>
+					<div data-role="fieldcontain">
+						<fieldset data-role="controlgroup" data-type="vertical">
+							<legend>
+								¿Realiza habitualmente al menos 30 minutos de
+								actividad física, en el trabajo y/o en el tiempo libre?:
+							</legend>
+
+							<input type="radio" name="PP_D" id="D_uno" value="0" />
+							<label
+							for="D_uno"> Si</label>
+							<input type="radio" name="PP_D"
+							id="D_dos" value="2" />
+							<label for="D_dos">No</label>
+
+						</fieldset>
+					</div>
+
+					<div data-role="fieldcontain">
+						<fieldset data-role="controlgroup" data-type="vertical">
+							<legend>
+								¿Con qué frecuencia come verduras o frutas?:
+							</legend>
+
+							<input type="radio" name="PP_E" id="E_uno" value="0" />
+							<label
+							for="E_uno"> Todos los dias</label>
+							<input type="radio"
+							name="PP_E" id="E_dos" value="1" />
+							<label for="E_dos"> No todos los dias</label>
+
+						</fieldset>
+					</div>
+
+					<div data-role="fieldcontain">
+						<fieldset data-role="controlgroup" data-type="vertical">
+							<legend>
+								¿Toma medicación para la hipertensión
+								regularmente?:
+							</legend>
+
+							<input type="radio" name="PP_F" id="F_uno" value="0" />
+							<label
+							for="F_uno"> No</label>
+							<input type="radio" name="PP_F"
+							id="F_dos" value="2" />
+							<label for="F_dos">Si</label>
+
+						</fieldset>
+					</div>
+
+					<div data-role="fieldcontain">
+						<fieldset data-role="controlgroup" data-type="vertical">
+							<legend>
+								¿Le han encontrado alguna vez valores de glucosa
+								altos (Ej. en un control médico, durante una enfermedad, durante
+								el embarazo)?:
+							</legend>
+
+							<input type="radio" name="PP_G" id="G_uno" value="0" />
+							<label
+							for="G_uno"> No</label>
+							<input type="radio" name="PP_G"
+							id="G_dos" value="5" />
+							<label for="G_dos">Si</label>
+
+						</fieldset>
+					</div>
+
+					<div data-role="fieldcontain">
+						<fieldset data-role="controlgroup" data-type="vertical">
+							<legend>
+								¿Se le ha diagnosticado diabetes (tipo 1 o tipo
+								2) a alguno de sus familiares allegados u otros parientes?
+							</legend>
+
+							<input type="radio" name="PP_H" id="H_uno" value="0" />
+							<label
+							for="H_uno"> No</label>
+							<input type="radio" name="PP_H"
+							id="H_dos" value="3" />
+							<label for="H_dos"> Sí: abuelos,
+								tía, tío, primo hermano</label>
+							<input type="radio" name="PP_H"
+							id="H_tres" value="5" />
+							<label for="H_tres"> Sí:
+								padres, hermanos o hijos</label>
+
+						</fieldset>
+                        <a href="#" data-role="button" onclick="Calcular('H')">Calcular</a>
+					</div>
+					<div data-role="footer" id="footer" data-theme="b" data-position="fixed" data-fullscreen="false" data-tap-toggle="false">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="javascript:GO(0)" data-transition="turn">Mi Perfil</a></li>
+                    <li><a href="javascript:GO(1);" data-transition="turn">Mi Glucosa</a></li>
+                    <li><a href="javascript:GO(2)" data-transition="turn">Mi Peso</a></li>
+                    <li><a href="javascript:GO(3)" data-transition="turn">Find Risk</a></li>
+                </ul>
+            </div>
+        </div>
+				</form>
+			</div>
+
+			<!-- /footer -->
+		</div>
+
+	</body>
+</html>
