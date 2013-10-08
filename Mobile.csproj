@@ -59,6 +59,7 @@
   <ItemGroup>
     <Content Include="AddGS.html" />
     <Content Include="AddPeso.html" />
+    <Content Include="config.xml" />
     <Content Include="RegPatient.html" />
     <Content Include="RegObjetivos.html" />
     <Content Include="RegHelp.html" />
@@ -159,18 +160,20 @@
     <Content Include="js\scripts.js" />
     <Content Include="media\sprite_estados.png" />
     <Content Include="Todos.html" />
-    <Content Include="Web.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
-    <None Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="web.Debug.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+    <None Include="web.Release.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
